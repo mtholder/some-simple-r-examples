@@ -86,6 +86,9 @@ for (r in 1 : nrow(data)) {
         if (c < length(row) && cell == row[c + 1]) {
             num.matching <- num.matching + 1;
         }
-        cat(r, " ", c, " ", cell, " ", num.neighbors, " ", num.matching, "\n");
+        cell.score <- (epsilon + num.matching)/(2*epsilon + num.neighbors);
+        total.score <- total.score * cell.score;
+        #cat(r, " ", c, " ", cell, " ", num.neighbors, " ", num.matching, "\n");
     }
 }
+cat('score = ', total.score);
