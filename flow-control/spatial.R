@@ -91,4 +91,4 @@ for (r in 1 : nrow(data)) {
         #cat(r, " ", c, " ", cell, " ", num.neighbors, " ", num.matching, "\n");
     }
 }
-cat('score = ', total.score);
+cat('score = ', total.score, "\n");
