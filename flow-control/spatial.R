@@ -37,6 +37,7 @@ data = matrix(c(1,0,0,0,1,0,0,0,0,0,
 # The value for the matrix is the product of this score for each cell
 epsilon <- 0.1;
 total.score = 1.0;
+
 count_matches <- function(cell, row, ind) {
     num.matching <- 0;
     if (row[ind] == cell) {
@@ -68,7 +69,7 @@ for (r in 1 : nrow(data)) {
         } else {
             num.neighbors = 8;
         }
-        num.matching <- 0;
+        num.matching <- count_matches(cell, row, c) - 1;
         if (r > 1) {
             prev.row <- data[(r - 1),];
             m <- count_matches(cell, prev.row, c);
@@ -79,12 +80,6 @@ for (r in 1 : nrow(data)) {
             next.row <- data[nr,];
             m <- count_matches(cell, next.row, c);
             num.matching <- num.matching + m;
-        }
-        if (c > 1 && cell == row[c - 1]) {
-            num.matching <- num.matching + 1;
-        }
-        if (c < length(row) && cell == row[c + 1]) {
-            num.matching <- num.matching + 1;
         }
         cell.score <- (epsilon + num.matching)/(2*epsilon + num.neighbors);
         total.score <- total.score * cell.score;
