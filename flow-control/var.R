@@ -35,3 +35,8 @@ cat(paste("faster var =", faster.sum.sq.dev/(n - 1), "\n"));
 cat(paste("faster sd =", sqrt(faster.sum.sq.dev/(n - 1)), "\n"));
 
 
+cat("\n\nBuiltins \n")
+cat(paste("fastest sum =", sum(data), "\n"));
+cat(paste("faster mean =", mean(data), "\n"));
+cat(paste("faster var =", var(data), "\n"));
+cat(paste("faster sd =", sd(data), "\n"));
