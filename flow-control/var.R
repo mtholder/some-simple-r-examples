@@ -23,3 +23,15 @@ sample.var <- sum.sq.dev/(n - 1)
 cat(paste("sample variance ", sample.var, "\n"));
 sample.sd <- sqrt(sample.var)
 cat(paste("sample standard deviation  ", sample.sd, "\n"));
+
+
+cat("\n\nArray \n")
+cat(paste("faster mean =", sum(data)/length(data), "\n"));
+m = sum(data)/length(data)
+faster.sq.dev = (data - m)**2
+faster.sum.sq.dev = sum((data - m)**2)
+cat(paste("faster squared dev =", faster.sum.sq.dev, "\n"));
+cat(paste("faster var =", faster.sum.sq.dev/(n - 1), "\n"));
+cat(paste("faster sd =", sqrt(faster.sum.sq.dev/(n - 1)), "\n"));
+
+
