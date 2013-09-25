@@ -38,8 +38,21 @@ data = matrix(c(1,0,0,0,1,0,0,0,0,0,
 cat("hi\n");
 for (r in 1 : nrow(data)) {
     row <- data[r,]
+    top.or.bottom <- r == 1 || r == nrow(data);
     for (c in 1 : length(row)) {
         cell <- row[c];
-        cat(r, " ", c, " ", cell, "\n");
+        left.or.right <- c == 1 || c == length(row);
+        if (left.or.right) {
+            if (top.or.bottom) {
+                num.neighbors = 3; # corner
+            } else {
+                num.neighbors = 5; # left or right side
+            }
+        } else if (top.or.bottom) {
+            num.neighbors = 5; # top or bottom side
+        } else {
+            num.neighbors = 8;
+        }
+        cat(r, " ", c, " ", cell, " ", num.neighbors, "\n");
     }
 }
