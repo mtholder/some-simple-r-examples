@@ -37,6 +37,20 @@ data = matrix(c(1,0,0,0,1,0,0,0,0,0,
 # The value for the matrix is the product of this score for each cell
 epsilon <- 0.1;
 total.score = 1.0;
+count_matches <- function(cell, row, ind) {
+    num.matching <- 0;
+    if (row[ind] == cell) {
+        num.matching <- num.matching + 1;
+    }
+    if (ind > 1 && row[ind - 1] == cell) {
+        num.matching <- num.matching + 1;
+    }
+    if (ind < length(row) && row[ind + 1] == cell) {
+        num.matching <- num.matching + 1;
+    }
+    return(num.matching);
+}
+
 for (r in 1 : nrow(data)) {
     row <- data[r,]
     top.or.bottom <- r == 1 || r == nrow(data);
@@ -57,28 +71,14 @@ for (r in 1 : nrow(data)) {
         num.matching <- 0;
         if (r > 1) {
             prev.row <- data[(r - 1),];
-            if (prev.row[c] == cell) {
-                num.matching <- num.matching + 1;
-            }
-            if (c > 1 && prev.row[c - 1] == cell) {
-                num.matching <- num.matching + 1;
-            }
-            if (c < length(prev.row) && prev.row[c + 1] == cell) {
-                num.matching <- num.matching + 1;
-            }
+            m <- count_matches(cell, prev.row, c);
+            num.matching <- num.matching + m;
         }
         if (r < nrow(data)) {
             nr = r + 1;
             next.row <- data[nr,];
-            if (next.row[c] == cell) {
-                num.matching <- num.matching + 1;
-            }
-            if (c > 1 && next.row[c - 1] == cell) {
-                num.matching <- num.matching + 1;
-            }
-            if (c < length(next.row) && next.row[c + 1] == cell) {
-                num.matching <- num.matching + 1;
-            }
+            m <- count_matches(cell, next.row, c);
+            num.matching <- num.matching + m;
         }
         if (c > 1 && cell == row[c - 1]) {
             num.matching <- num.matching + 1;
