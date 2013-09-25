@@ -35,3 +35,11 @@ data = matrix(c(1,0,0,0,1,0,0,0,0,0,
 # to 0.5
 #
 # The value for the matrix is the product of this score for each cell
+cat("hi\n");
+for (r in 1 : nrow(data)) {
+    row <- data[r,]
+    for (c in 1 : length(row)) {
+        cell <- row[c];
+        cat(r, " ", c, " ", cell, "\n");
+    }
+}
